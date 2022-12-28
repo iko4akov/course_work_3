@@ -18,9 +18,9 @@ post_blueprint = Blueprint("post_blueprint", __name__, template_folder='template
 @main_blueprint.route("/")
 def index_page():
     post_handler = PostHandler('data/posts.json')
-    posts = post_handler.load_posts()
+    posts = post_handler.load_file()
     comment_handler = PostHandler('data/comments.json')
-    comments = comment_handler.load_comments()
+    comments = comment_handler.load_file()
     com_post = post_handler.get_count_comment(posts, comments)
     return render_template("index.html", posts=posts, comments=comments, com_post=com_post)
 

@@ -16,5 +16,5 @@ def static_dir(path):
     """Позволяет использовать директорию с файлами upload"""
     return send_from_directory("uploads", path)
 
-
-app.run()
+if __name__ == "__main__":
+    app.run()
