@@ -1,11 +1,27 @@
 import json
+
 from json import JSONDecodeError
+
 POSTS_PATH = "../data/posts.json"
-class PostHandler():
+
+
+def get_count_comment(posts, comments):
+    """Получение списка cловарей в формате ид поста: кол-во коментариев"""
+    com_post = {}
+    for i in range(len(posts)):
+        count = 0
+        for comment in comments:
+            if comment["post_id"] == i + 1:
+                count += 1
+        com_post[i + 1] = count
+    return com_post
+
+
+class PostHandler:
     """Создаем класс обработчик всех действий с данными"""
 
     def __init__(self, path):
-        """инициализатор пути"""
+        """Инициализатор пути"""
         self.path = path
 
     def load_file(self):
@@ -24,17 +40,17 @@ class PostHandler():
     def get_posts_by_user(self, user_name):
         """возвращает список (---posts_for_name---) словарей постов определенного пользователя"""
         if type(user_name) not in [str]:
-            raise TypeError("Имя пользователя жолжно быть строкой")
-        # Список для выдачи None(для получения ошибки VallueError) при отсутствии запрошенного имени
+            raise TypeError("Имя пользователя должно быть строкой")
+        # Список для выдачи None(для получения ошибки ValueError) при отсутствии запрошенного имени
         names = []
         posts_for_name = []
-        #получение списка из json
+        # получение списка из json
         posts = self.load_file()
         for post in posts:
-            if user_name.lower() == post['poster_name']:
+            if user_name.lower() == post['poster_name'].lower():
                 posts_for_name.append(post)
                 names.append(post["poster_name"])
-        #Вывод ошибки при отсутствии запрошенного имени пользователя(---poster_name---) в файле posts.json
+        # Вывод ошибки при отсутствии запрошенного имени пользователя(---poster_name---) в файле posts.json
         if user_name not in names:
             raise ValueError("Пользователь не найден")
         else:
@@ -42,17 +58,18 @@ class PostHandler():
 
     def get_comments_by_post_id(self, post_id):
         """возвращает список словарей(---comments_for_post---) с комментариями определенного поста"""
-        #Обработчик ошибки если не правильный формат id поста
+        # Обработчик ошибки если не правильный формат id поста
         if type(post_id) not in [int]:
             raise TypeError("Не верный формат id поста")
+
         comments_for_post = []
         comments = self.load_file()
 
         # Вывод ошибки при отсутствии запрошенного номера поста(---post_id---) в файле comments.json
         if post_id > len(comments) or post_id < 0:
-            raise ValueError("Такого поста не существует")
+            raise ValueError(f"Не верный номер поста укажите: от 0 до {len(comments)} включительно")
 
-        #Создание списка с коментами к искомому посту(---post_id---)
+        # Создание списка с коментами к искомому посту(---post_id---)
         for comment in comments:
             if comment["post_id"] == post_id:
                 comments_for_post.append(comment)
@@ -71,28 +88,18 @@ class PostHandler():
         """Возвращает словарь с данными для одного поста по его идентификатору"""
         post_fined = {}
         posts = self.load_file()
+        # Вывод ошибки при отсутствии запрошенного номера поста(---pk---) в файле posts.json
+        if 0 > pk or pk > len(posts):
+            raise ValueError(f"Не верный номер поста укажите: от 0 до {len(posts)} включительно")
         for post in posts:
             if post["pk"] == pk:
                 post_fined = post
         return post_fined
 
-    def get_count_comment(self, posts, comments):
-        """Получение списка cловарей в формате ид поста: кол-во коментариев"""
-        com_post = {}
-        for i in range(len(posts)):
-            count = 0
-            for comment in comments:
-                if comment["post_id"] == i+1:
-                    count += 1
-            com_post[i+1] = count
-        return com_post
-
-
     def save_posts_to_json(self, posts):
-        """Сохрфняет новый список словарей в json фаил"""
+        """Сохраняет новый список словарей в json файл"""
         with open(self.path, 'w', encoding='utf-8') as file:
             json.dump(posts, file)
-
 
     def add_post(self, post):
         """Добавляет новый пост(словарь) в список словарей"""

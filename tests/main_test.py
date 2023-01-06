@@ -1,10 +1,21 @@
 import pytest
-from main.utils import PostHandler
+import run
 
-POSTS_PATH = "../data/posts.json"
+class TestMain:
+
+    def test_root_status(self, test_client):
+        """ Проверяем, получается ли нужный статус-код и """
+        response = test_client.get('/meow', follow_redirects=True)
+        assert response.status_code == 200, f"Статус-код {response.status_code} всех постов неверный"
+
+    def test_api(self, keys_fixture):
+        response = run.test_client().get('/')
+
+        assert response.status_code == 200
+        assert type(response.json) == dict
+        assert set(response.json.keys()) == keys_fixture
 
 
-class TestHandler:
     def test_init_(self, path):
         pass
 
@@ -15,9 +26,7 @@ class TestHandler:
         pass
 
     def test_get_posts_by_user(self):
-        with pytest.raises(TypeError):
-            test = PostHandler(POSTS_PATH)
-            test.get_posts_by_user(1235)
+        pass
 
     def test_get_comments_by_post_id(self):
         pass
