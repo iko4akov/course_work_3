@@ -1,7 +1,25 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 from bp_main.view import main_blueprint, search_blueprint, user_blueprint, post_blueprint
+from bp_main.dao.main_dao import PostsDAO
+import logging
 
-POSTS_PATH = "/data/posts.json"
+
+# Создаем или получаем новый логгер
+logger = logging.getLogger("basic")
+# Cоздаем ему обработчик(бывает консольный и файловый) в котором указываю имя файла сохранения логов и кодировку для винды
+file_handler = logging.FileHandler("api.log", encoding="utf-8")
+# Создаем новое форматирование (объект класса Formatter)
+formatter_one = logging.Formatter("%(asctime)s : %(levelname)s : %(message)s")
+# Применяем форматирование к обработчику
+file_handler.setFormatter(formatter_one)
+# Добавляем обработчик к журналу
+logger.addHandler(file_handler)
+# Задаем уровень логера
+logger.setLevel(logging.DEBUG)
+
+
+
+POSTS_PATH = "data/posts.json"
 
 app = Flask(__name__)
 
@@ -28,6 +46,27 @@ def not_found(e):
 def static_dir(path):
     """Позволяет использовать директорию с файлами upload"""
     return send_from_directory("uploads", path)
+
+
+@app.get("/GET/api/posts")
+def get_api_page():
+    """возвращает полный список постов в виде JSON-списка"""
+    posts = PostsDAO(POSTS_PATH)
+    data = posts.load_file()
+    logger.debug("запрос API постов")
+    return jsonify(data)
+
+
+@app.get("/GET/api/posts/<int:post_id>")
+def get_api_one_page(post_id):
+    """возвращает полный список постов в виде JSON-списка"""
+    posts = PostsDAO(POSTS_PATH)
+    data = posts.get_post_by_pk(post_id)
+    logger.debug(f"Запрос API поста c ID: {post_id}")
+    return jsonify(data)
+
+
+
 
 
 if __name__ == "__main__":
