@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{user_name} user feed</title>
-  <link href="../static/css/styles.min.css" rel="stylesheet">
+  <title>{{user_name}}</title>
+  <link href="../../static/css/styles.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
         </svg>
       </a>
-      <a href="/" class="header__logo-link">
+      <a href="/user/{{user_name}}" class="header__logo-link">
         <h1 class="header__logo-text">{{user_name}}</h1>
       </a>
     </div>
@@ -39,7 +39,7 @@
         <p class="item__descr"><a href="#" class="item__tag">#food</a> {{ post.content[0:50]}}...</p>
         <div class="item__post-info">
           <div class="item__counter">
-            <img src="../static/img/eye.png" alt="" class="item__counter-icon" width="26">
+            <img src="../../static/img/eye.png" alt="" class="item__counter-icon" width="26">
             <span class="item__counter-text">{{ post.views_count }}</span>
           </div>
         </div>

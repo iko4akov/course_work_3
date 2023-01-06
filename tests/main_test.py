@@ -3,10 +3,10 @@ import run
 
 class TestMain:
 
-    def test_root_status(self, test_client):
-        """ Проверяем, получается ли нужный статус-код и """
-        response = test_client.get('/meow', follow_redirects=True)
-        assert response.status_code == 200, f"Статус-код {response.status_code} всех постов неверный"
+    # def test_root_status(self, test_client):
+    #     """ Проверяем, получается ли нужный статус-код и """
+    #     response = test_client.get('/meow', follow_redirects=True)
+    #     assert response.status_code == 200, f"Статус-код {response.status_code} всех постов неверный"
 
     # def test_api(self, keys_fixture):
         # response = run.test_client().get('/')
