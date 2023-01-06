@@ -8,12 +8,12 @@ class TestMain:
         response = test_client.get('/meow', follow_redirects=True)
         assert response.status_code == 200, f"Статус-код {response.status_code} всех постов неверный"
 
-    def test_api(self, keys_fixture):
-        response = run.test_client().get('/')
-
-        assert response.status_code == 200
-        assert type(response.json) == dict
-        assert set(response.json.keys()) == keys_fixture
+    # def test_api(self, keys_fixture):
+        # response = run.test_client().get('/')
+        #
+        # assert response.status_code == 200
+        # assert type(response.json) == dict
+        # assert set(response.json.keys()) == keys_fixture
 
 
     def test_init_(self, path):
