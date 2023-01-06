@@ -28,5 +28,6 @@ class TestPostsDAO:
     def test_get_by_pk(self, posts_dao):
         """ Проверяем, верный ли post возвращается при запросе одного """
         post = posts_dao.get_post_by_pk(1)
+        assert type(post) == dict, "возвращается не словарь"
         assert post["pk"] == 1, "возвращается неправильный кандидат"
         assert set(post.keys()) == keys_should_be, "неверный список ключей"

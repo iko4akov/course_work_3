@@ -9,18 +9,18 @@ logger = logging.getLogger("basic")
 # Cоздаем ему обработчик(бывает консольный и файловый) в котором указываю имя файла сохранения логов и кодировку для винды
 file_handler = logging.FileHandler("api.log", encoding="utf-8")
 # Создаем новое форматирование (объект класса Formatter)
-formatter_one = logging.Formatter("%(asctime)s : %(levelname)s : %(message)s")
+formatter_one = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
 # Применяем форматирование к обработчику
 file_handler.setFormatter(formatter_one)
 # Добавляем обработчик к журналу
 logger.addHandler(file_handler)
 # Задаем уровень логера
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
-
-
+#Создание константы адресса к файлу поста
 POSTS_PATH = "data/posts.json"
 
+#Создание экземпляр класса Flask
 app = Flask(__name__)
 
 #Регистрация блюпринтов для работы приложения
@@ -53,7 +53,8 @@ def get_api_page():
     """возвращает полный список постов в виде JSON-списка"""
     posts = PostsDAO(POSTS_PATH)
     data = posts.load_file()
-    logger.debug("запрос API постов")
+    logger.info("Запрос /api/posts")
+    print(data)
     return jsonify(data)
 
 
@@ -62,11 +63,8 @@ def get_api_one_page(post_id):
     """возвращает полный список постов в виде JSON-списка"""
     posts = PostsDAO(POSTS_PATH)
     data = posts.get_post_by_pk(post_id)
-    logger.debug(f"Запрос API поста c ID: {post_id}")
+    logger.info(f"Запрос /api/posts/{post_id}")
     return jsonify(data)
-
-
-
 
 
 if __name__ == "__main__":
