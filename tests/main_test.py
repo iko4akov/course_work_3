@@ -1,5 +1,3 @@
-from bp_main.dao.main_dao import PostsDAO
-
 class TestMain:
 
     def test_root_status(self, test_client):

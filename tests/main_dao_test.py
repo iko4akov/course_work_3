@@ -2,7 +2,6 @@ from bp_main.dao.main_dao import PostsDAO
 
 import pytest
 
-
 POSTS_PATH = "./data/posts.json"
 
 
@@ -13,8 +12,10 @@ def posts_dao():
     posts_dao_instance = PostsDAO(POSTS_PATH)
     return posts_dao_instance
 
+
 # Задаем, какие ключи ожидаем получать в постах
 keys_should_be = {"poster_name", "poster_avatar", "pic", "content", "views_count", "likes_count", "pk"}
+
 
 class TestPostsDAO:
 
