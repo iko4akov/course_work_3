@@ -3,7 +3,7 @@ import json
 from json import JSONDecodeError
 
 
-POSTS_PATH = "../data/posts.json"
+POSTS_PATH = "../../data/posts.json"
 
 
 def get_count_comment(posts, comments):
@@ -18,7 +18,7 @@ def get_count_comment(posts, comments):
     return com_post
 
 
-class PostHandler:
+class PostsDAO:
     """Создаем класс обработчик всех действий с данными"""
 
     def __init__(self, path):
