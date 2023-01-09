@@ -1,7 +1,8 @@
 from flask import Flask, send_from_directory, jsonify
-from bp_main.view import main_blueprint, search_blueprint, user_blueprint, post_blueprint
+from bp_main.view import main_blueprint, search_blueprint, user_blueprint, post_blueprint, POSTS_PATH
 from bp_main.dao.main_dao import PostsDAO
 import logging
+
 
 # Создаем или получаем новый логгер
 logger = logging.getLogger("basic")
@@ -17,8 +18,6 @@ logger.addHandler(file_handler)
 # Задаем уровень логера
 logger.setLevel(logging.INFO)
 
-# Создание константы адреса к файлу поста
-POSTS_PATH = "data/posts.json"
 
 # Создание экземпляр класса Flask
 app = Flask(__name__)
