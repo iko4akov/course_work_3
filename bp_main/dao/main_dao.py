@@ -3,9 +3,6 @@ import json
 from json import JSONDecodeError
 
 
-POSTS_PATH = "../../data/posts.json"
-
-
 def get_count_comment(posts, comments):
     """Получение списка cловарей в формате ид поста: кол-во коментариев"""
     com_post = {}
