@@ -13,6 +13,9 @@ search_blueprint = Blueprint("search_blueprint", __name__, template_folder='temp
 
 @search_blueprint.get('/search')
 def search_page():
+    """получает поисковой запрос
+    загружает файл с постами и в нем ищет посты с поисковым запросом
+    возвразщает в шаблон найденные посты"""
     substr = request.args.get("s")
     # Условие для отображения пустой страницы поиска
     if substr is None:

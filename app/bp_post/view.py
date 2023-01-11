@@ -14,6 +14,10 @@ post_blueprint = Blueprint("post_blueprint", __name__, template_folder='template
 
 @post_blueprint.get('/post/<int:pk>')
 def post_page(pk):
+    """Получает переменную (порядковый номер поста)
+    загружает 2 файла с постами, и коментами
+    получает один пост по переменной
+    возвращает в шаблон один пост и коменты к нему"""
     comment_handler = PostDAO(COMMENT_PATH)
     post_handler = PostDAO(POSTS_PATH)
     post = post_handler.get_post_by_pk(pk)

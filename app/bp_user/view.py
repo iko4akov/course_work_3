@@ -10,6 +10,9 @@ user_blueprint = Blueprint("user_blueprint", __name__, template_folder='template
 
 @user_blueprint.get('/user/<user_name>')
 def user_page(user_name):
+    """Получает имя пользователя
+    находит все посты по имени пользователя
+    возвращает в шаблон посты пользователя и имя пользователя"""
     post_handler = UserDAO(POSTS_PATH)
     posts_for_name = post_handler.get_posts_by_user(user_name)
     return render_template("user-feed.html", posts_for_name=posts_for_name, user_name=user_name)
