@@ -1,3 +1,4 @@
+
 class TestMain:
 
     def test_root_status(self, test_client):
@@ -8,3 +9,4 @@ class TestMain:
     def test_root_content(self, test_client):
         response = test_client.get('/', follow_redirects=True)
         assert "SKYPROGRAM" in response.data.decode("utf-8"), "Название главной страницы не совпадает"
+
