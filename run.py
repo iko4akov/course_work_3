@@ -1,9 +1,9 @@
 from flask import Flask, send_from_directory
-from bp_main.view import main_blueprint
-from bp_post.view import post_blueprint
-from bp_search.view import search_blueprint
-from bp_user.view import user_blueprint
-from bp_api.view import api_blueprint
+from app.bp_main.view import main_blueprint
+from app.bp_post.view import post_blueprint
+from app.bp_search.view import search_blueprint
+from app.bp_user.view import user_blueprint
+from app.bp_api.view import api_blueprint
 
 
 # Создание экземпляр класса Flask

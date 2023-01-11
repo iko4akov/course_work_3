@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from bp_user.dao.user_dao import UserDAO
+from app.bp_user.dao.user_dao import UserDAO
 
 POSTS_PATH = 'data/posts.json'
 

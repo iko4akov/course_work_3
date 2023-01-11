@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 
 import logging
 
-from bp_api.dao.api_dao import ApiDAO
+from app.bp_api.dao.api_dao import ApiDAO
 
 
 POSTS_PATH = 'data/posts.json'

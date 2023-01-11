@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 
 
-from bp_search.dao.search_dao import SearchDAO
+from app.bp_search.dao.search_dao import SearchDAO
 
 
 POSTS_PATH = 'data/posts.json'
