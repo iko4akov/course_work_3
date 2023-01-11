@@ -24,7 +24,7 @@ logger.setLevel(logging.INFO)
 
 
 # Создаем блюпринт API всех постов
-api_blueprint = Blueprint("api_posts_blueprint", __name__, template_folder='templates', url_prefix="/GET/api/posts")
+api_blueprint = Blueprint("api_posts_blueprint", __name__, template_folder='templates')
 
 
 @api_blueprint.get("/")

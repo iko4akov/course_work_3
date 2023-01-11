@@ -22,7 +22,7 @@ app.register_blueprint(search_blueprint)
 app.register_blueprint(user_blueprint)
 
 #Регистрация блюпринтов API
-app.register_blueprint(api_blueprint)
+app.register_blueprint(api_blueprint, url_prefix="/GET/api/posts")
 
 
 @app.errorhandler(404)
