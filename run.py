@@ -39,7 +39,7 @@ def not_found(e):
 
 @app.route("/uploads/<path:path>")
 def static_dir(path):
-    """Позволяет использовать директорию с файлами upload"""
+    """Позволяет использовать директорию с файлами upload, чтоб не потерять"""
     return send_from_directory("uploads", path)
 
 

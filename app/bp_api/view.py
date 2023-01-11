@@ -29,7 +29,7 @@ api_blueprint = Blueprint("api_posts_blueprint", __name__, template_folder='temp
 
 @api_blueprint.get("/")
 def get_api_page():
-    """Возвращает полный список постов в виде JSON-списка"""
+    """Загружает все посты из файла, показывает их в браузере(правда походу в двоичном коде)"""
     posts = ApiDAO(POSTS_PATH)
     data = posts.load_file()
     logger.info("Запрос /api/posts")
@@ -38,7 +38,7 @@ def get_api_page():
 
 @api_blueprint.get("/<int:post_id>")
 def get_api_one_page(post_id):
-    """Возвращает список поста в виде JSON-списка"""
+    """Загружает один пост по его айди из файла, показывает его в браузере(правда походу в двоичном коде)"""
     posts = ApiDAO(POSTS_PATH)
     data = posts.get_post_by_pk(post_id)
     logger.info(f"Запрос /api/posts/{post_id}")
