@@ -24,13 +24,10 @@ logger.setLevel(logging.INFO)
 
 
 # Создаем блюпринт API всех постов
-api_posts_blueprint = Blueprint("api_posts_blueprint", __name__, template_folder='templates')
-
-# Создаем блюпринт API одного поста
-api_post_blueprint = Blueprint("api_post_blueprint", __name__, template_folder='templates')
+api_blueprint = Blueprint("api_posts_blueprint", __name__, template_folder='templates', url_prefix="/GET/api/posts")
 
 
-@api_posts_blueprint.get("/GET/api/posts")
+@api_blueprint.get("/")
 def get_api_page():
     """Возвращает полный список постов в виде JSON-списка"""
     posts = ApiDAO(POSTS_PATH)
@@ -39,7 +36,7 @@ def get_api_page():
     return jsonify(data)
 
 
-@api_post_blueprint.get("/GET/api/posts/<int:post_id>")
+@api_blueprint.get("/<int:post_id>")
 def get_api_one_page(post_id):
     """Возвращает список поста в виде JSON-списка"""
     posts = ApiDAO(POSTS_PATH)

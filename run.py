@@ -1,13 +1,9 @@
-import logging
-
 from flask import Flask, send_from_directory
-
-
 from bp_main.view import main_blueprint
 from bp_post.view import post_blueprint
 from bp_search.view import search_blueprint
 from bp_user.view import user_blueprint
-from bp_api.view import api_post_blueprint, api_posts_blueprint
+from bp_api.view import api_blueprint
 
 
 # Создание экземпляр класса Flask
@@ -26,8 +22,8 @@ app.register_blueprint(search_blueprint)
 app.register_blueprint(user_blueprint)
 
 #Регистрация блюпринтов API
-app.register_blueprint(api_posts_blueprint)
-app.register_blueprint(api_post_blueprint)
+app.register_blueprint(api_blueprint)
+
 
 @app.errorhandler(404)
 def not_found(e):
