@@ -1,10 +1,6 @@
 from flask import Blueprint, render_template, request
-
-
 from app.bp_search.dao.search_dao import SearchDAO
-
-
-POSTS_PATH = 'data/posts.json'
+from config.development import POSTS_PATH
 
 
 # Создаем блюпринт страницы поиска

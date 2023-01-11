@@ -2,7 +2,6 @@ import json
 
 from json import JSONDecodeError
 
-
 class ApiDAO:
     """Создаем класс обработчик всех действий с данными"""
     def __init__(self, path):

@@ -2,10 +2,7 @@ from flask import Blueprint, render_template
 
 from app.bp_post.dao.post_dao import PostDAO
 
-
-POSTS_PATH = 'data/posts.json'
-
-COMMENT_PATH = 'data/comments.json'
+from config.development import POSTS_PATH, COMMENT_PATH
 
 
 # Создаем блюпринт страницы с постом по айди

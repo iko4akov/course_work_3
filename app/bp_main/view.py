@@ -2,10 +2,8 @@ from flask import Blueprint, render_template
 
 from app.bp_main.dao.main_dao import MainDAO
 
+from config.development import POSTS_PATH, COMMENT_PATH
 
-POSTS_PATH = 'data/posts.json'
-
-COMMENT_PATH = 'data/comments.json'
 
 # Создаем блюпринт главной страницы
 main_blueprint = Blueprint("main_blueprint", __name__, template_folder='templates')

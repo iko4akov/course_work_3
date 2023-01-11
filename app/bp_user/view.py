@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template
-
 from app.bp_user.dao.user_dao import UserDAO
-
-POSTS_PATH = 'data/posts.json'
+from config.development import POSTS_PATH
 
 # Создаем блюпринт страницы с постами одного пользователя
 user_blueprint = Blueprint("user_blueprint", __name__, template_folder='templates')

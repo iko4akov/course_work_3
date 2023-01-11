@@ -1,11 +1,10 @@
 from flask import Blueprint, jsonify
 
+from config.development import POSTS_PATH
+
 import logging
 
 from app.bp_api.dao.api_dao import ApiDAO
-
-
-POSTS_PATH = 'data/posts.json'
 
 
 # Создаем или получаем новый логгер
