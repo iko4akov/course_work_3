@@ -3,7 +3,7 @@ import json
 from json import JSONDecodeError
 
 
-class MainDAO:
+class SearchDAO:
     """Создаем класс обработчик всех действий с данными"""
 
     def __init__(self, path):
@@ -25,14 +25,11 @@ class MainDAO:
             return "Файл не удается преобразовать"
 
 
-    def get_count_comment(self, comments):
-        """Получение списка cловарей в формате ид поста: кол-во коментариев"""
-        com_post = {}
-        posts = self.load_file()
-        for i in range(len(posts)):
-            count = 0
-            for comment in comments:
-                if comment["post_id"] == i + 1:
-                    count += 1
-            com_post[i + 1] = count
-        return com_post
+    def search_posts(self, substr):
+        """Возвращает список(---searh_list---) словарей с постами по ключевому слову"""
+        searh_list = []
+        load_posts = self.load_file()
+        for post in load_posts:
+            if substr.lower() in post['content'].lower():
+                searh_list.append(post)
+        return searh_list

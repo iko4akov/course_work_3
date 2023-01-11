@@ -36,7 +36,6 @@
           <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
         <p class="item__descr">{{ post.content[0:50] }}...</p>
-
         <div class="item__bottom">
           <div class="item__post-info">
             <p class="item__comments-counter">{{ com_post[post["pk"]] }} комментария</p>
@@ -46,12 +45,10 @@
             </div>
           </div>
         </div>
-
-
         <div class="item__post-bottom">
           <a href="/post/{{ post.pk }}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
-            <img src="./static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+            <img src="../../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>
         </div>
       </div>

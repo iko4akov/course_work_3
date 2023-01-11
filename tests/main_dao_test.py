@@ -1,4 +1,4 @@
-from bp_main.dao.main_dao import PostsDAO
+from bp_main.dao.main_dao import MainDAO
 
 import pytest
 
@@ -9,7 +9,7 @@ POSTS_PATH = "./data/posts.json"
 
 @pytest.fixture()
 def posts_dao():
-    posts_dao_instance = PostsDAO(POSTS_PATH)
+    posts_dao_instance = MainDAO(POSTS_PATH)
     return posts_dao_instance
 
 
