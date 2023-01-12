@@ -55,6 +55,7 @@ def static_dir(path):
 
 @app.get("/development")
 def development_page():
+    """Тестовая вьюшка вытаскивания данных их .env"""
     return f"<p>С целью отблагодарить материально разработчика обращаться: <h3>{os.environ.get('MAIL_Development')}</h3></p>" \
            f"Донаты и поддержка проекта: <h1>{os.environ.get('number_card')} сбер))</h1>\n" \
            f"Telegramm <h2>{os.environ.get('number_phone')}</h2>"
