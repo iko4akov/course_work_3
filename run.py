@@ -1,26 +1,37 @@
+import os
+
+import dotenv
 from flask import Flask, send_from_directory
+
+from app.bp_api.view import api_blueprint
 from app.bp_main.view import main_blueprint
 from app.bp_post.view import post_blueprint
 from app.bp_search.view import search_blueprint
 from app.bp_user.view import user_blueprint
-from app.bp_api.view import api_blueprint
-
 
 # Создание экземпляр класса Flask
 app = Flask(__name__)
 
+dotenv.load_dotenv(override=True)
+
+# В зависимости от значения CONFIG подключаем тот или другой конфиг
+if os.environ.get("CONFIG") == "debelopment":
+    app.config.from_pyfile("config/development.py")
+    POSTS_PATH = app.config.get('POSTS_PATH')
+    COMMENT_PATH = app.config.get('COMMENT_PATH')
+else:
+    app.config.from_pyfile("config/production.py")
+    POSTS_PATH = app.config.get('POSTS_PATH')
+    COMMENT_PATH = app.config.get('COMMENT_PATH')
+
 # Регистрация блюпринта главной страницы
 app.register_blueprint(main_blueprint)
-
 # Регистрация блюпринта одного поста
 app.register_blueprint(post_blueprint)
-
 # Регистрация блюпринта поисковой страницы с результатами поиска
 app.register_blueprint(search_blueprint)
-
 # Регистрация блюпринта страницы пользователя
 app.register_blueprint(user_blueprint)
-
 #Регистрация блюпринтов API
 app.register_blueprint(api_blueprint, url_prefix="/GET/api/posts")
 
