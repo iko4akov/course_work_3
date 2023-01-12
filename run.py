@@ -1,6 +1,6 @@
 import os
-
 import dotenv
+
 from flask import Flask, send_from_directory
 
 from app.bp_api.view import api_blueprint
@@ -15,14 +15,14 @@ app = Flask(__name__)
 dotenv.load_dotenv(override=True)
 
 # В зависимости от значения CONFIG подключаем тот или другой конфиг
+# Если честно практического применения в этой курсовой не нашел
 if os.environ.get("CONFIG") == "debelopment":
     app.config.from_pyfile("config/development.py")
-    POSTS_PATH = app.config.get('POSTS_PATH')
-    COMMENT_PATH = app.config.get('COMMENT_PATH')
+    #Для примера можно вытащить POSTS_PATH, использовать нельзя зацикливается импорт файла на файл
+    POSTS_PATH = app.config.get("POSTS_PATH")
 else:
     app.config.from_pyfile("config/production.py")
-    POSTS_PATH = app.config.get('POSTS_PATH')
-    COMMENT_PATH = app.config.get('COMMENT_PATH')
+
 
 # Регистрация блюпринта главной страницы
 app.register_blueprint(main_blueprint)
@@ -52,6 +52,12 @@ def not_found(e):
 def static_dir(path):
     """Позволяет использовать директорию с файлами upload (оставил тут, чтоб не потерять)"""
     return send_from_directory("uploads", path)
+
+@app.get("/development")
+def development_page():
+    return f"<p>С целью отблагодарить материально разработчика обращаться: <h3>{os.environ.get('MAIL_Development')}</h3></p>" \
+           f"Донаты и поддержка проекта: <h1>{os.environ.get('number_card')} сбер))</h1>\n" \
+           f"Telegramm <h2>{os.environ.get('number_phone')}</h2>"
 
 
 if __name__ == "__main__":
